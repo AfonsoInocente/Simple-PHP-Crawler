@@ -3,9 +3,6 @@
 namespace App\Infra;
 
 class ExternalRequest {
-    private object $_CURL;
-    private string $_URL;
-
     public function __construct(private string $URL)
     {}
 

@@ -6,13 +6,14 @@ use PHPUnit\Framework\TestCase;
 
 use \App\Infra\ExternalRequest;
 use \App\Infra\Interactor;
+use \App\Utils\CookieExtractor;
 
-require_once('../vendor/autoload.php');
+require_once('vendor/autoload.php');
 
 class InteractorTest extends TestCase {
     public function testRetrieveToken()
     {
-        $DOMDocument = new DOMDocument();
+        $DOMDocument = new \DOMDocument();
         $Interactor = new Interactor($DOMDocument);
 
         $html = '<html>
@@ -23,7 +24,7 @@ class InteractorTest extends TestCase {
 
         $loadHtml = $Interactor->loadHTMLData($html);
 
-        $AdapterInteractor = new DOMXpath($loadHtml['Interactor']);
+        $AdapterInteractor = new \DOMXpath($loadHtml['Interactor']);
         $token = $Interactor->getTokenValue($AdapterInteractor);
 
         $expectedValue = 'y17755385y7y8878z3v1249172wz6v4x';
@@ -32,22 +33,22 @@ class InteractorTest extends TestCase {
 
     public function testRetrieveCookie()
     {
-        $Interactor = new Interactor();
-
         $url = 'http://applicant-test.us-east-1.elasticbeanstalk.com/';
         $ExternalRequest = new ExternalRequest($url);
 
         $preparedCurl = $ExternalRequest->prepareToGetData();
         $response = $ExternalRequest->execute($preparedCurl);
 
-        $cookie = $Interactor->findCookie($response);
+        $cookieToFind = 'PHPSESSID';
+        $CookieExtractor = new CookieExtractor();
+        $cookie = $CookieExtractor->findCookie($cookieToFind, $response);
 
-        $this->assertEquals("PHPSESSID=", substr($cookie, 0, 10));
+        $this->assertEquals($cookieToFind, substr($cookie, 0, 9));
     }
 
     public function testRetrieveAnswer()
     {
-        $DOMDocument = new DOMDocument();
+        $DOMDocument = new \DOMDocument();
         $Interactor = new Interactor($DOMDocument);
 
         $html = '<html>

@@ -20,18 +20,6 @@ class Interactor {
         ];
     }
 
-    public function findCookie(string $html): string {
-        preg_match_all('/^Set-Cookie:\s*([^;]*)/im', $html, $matches);
-        foreach($matches[1] as $item) {
-            if (substr($item, 0, 9 ) === "PHPSESSID") {
-                return $item;
-            }
-        }
-
-        throw new Exception("Nenhum Cookie encontrado.");
-
-    }
-
     public function getTokenValue(object $HTMLAdapterInteractor): string {
         return $HTMLAdapterInteractor->query('//input[@id="token"]')
         ->item(0)

@@ -6,7 +6,8 @@ class Controller {
     public function __construct(
         public object $RequestController,
         public object $InterfaceController,
-        public object $TokenConversor
+        public object $TokenConversor,
+        public object $CookieExtractor
     ) {}
 
     public function getInitialData(): string {
@@ -20,8 +21,8 @@ class Controller {
         return $htmlResponseAndInteractor;
     }
 
-    public function getCookie(string $HTML): string {
-        return $this->InterfaceController->findCookie($HTML);
+    public function getCookie(string $cookieName, string $HTML): string {
+        return $this->CookieExtractor->findCookie($cookieName, $HTML);
     }
 
     public function getToken(object $HTMLInteractor): string {

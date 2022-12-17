@@ -12,10 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src",
-            "App\\Controllers\\": "src/controllers",
-            "App\\Utils\\": "src/utils",
-            "App\\Infra\\": "src/infra"
+            "App\\": "src"
         },
         "files": [
             "src/helpers/constants.php"
