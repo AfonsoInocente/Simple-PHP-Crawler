@@ -13,3 +13,9 @@ At the second step, the code should convert Token to a specific format, converti
 The third step requires a POST to the same first url, but now, containing the converted token and the getted cookie to get another html response who have the answerd;
 
 And the fourth and last step requires to identify what is the answer hidden in the middle of HTML and show at the screen;
+
+###############################################
+
+O PHPUnit é utilizado para a realização dos testes. Basta instala-lo através do COMPOSER:
+- "composer require phpunit/phpunit --dev"
+Após a instalação, executar o: "vendor/bin/phpunit" a partir do terminal de sua preferência.

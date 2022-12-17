@@ -1,6 +1,5 @@
 <?php
 
-
 class ExternalRequest {
     private object $_CURL;
     private string $_URL;

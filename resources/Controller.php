@@ -2,7 +2,7 @@
 
 class Controller {
     public $_RequestController;
-    public $_InterfaceController;
+    public $_InteractorController;
     public $_TokenConversor;
 
     function __construct(
@@ -11,7 +11,7 @@ class Controller {
         object $TokenConversor
     ) {
         $this->_RequestController = $RequestController;
-        $this->_InterfaceController = $InterfaceController;
+        $this->_InteractorController = $InterfaceController;
         $this->_TokenConversor = $TokenConversor;
     }
 
@@ -22,16 +22,16 @@ class Controller {
     }
 
     public function loadResponse($response): array {
-        $htmlResponseAndInteractor = $this->_InterfaceController->loadHTMLData($response);
+        $htmlResponseAndInteractor = $this->_InteractorController->loadHTMLData($response);
         return $htmlResponseAndInteractor;
     }
 
     public function getCookie(string $HTML): string {
-        return $this->_InterfaceController->findCookie($HTML);
+        return $this->_InteractorController->findCookie($HTML);
     }
 
     public function getToken(object $HTMLInteractor): string {
-        return $this->_InterfaceController->getTokenValue($HTMLInteractor);
+        return $this->_InteractorController->getTokenValue($HTMLInteractor);
     }
 
     public function convertToken(string $actualToken) {
@@ -46,7 +46,7 @@ class Controller {
     }
 
     public function getAnswer(string $element): string {
-        return $this->_InterfaceController->findTheAnswer($element);
+        return $this->_InteractorController->findTheAnswer($element);
     }
 
     public function tellTheAnswer($answer, $cookie, $initialToken, $token): void {

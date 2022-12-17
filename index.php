@@ -1,6 +1,6 @@
 <?php
 require_once('resources/Controller.php');
-require_once('resources/Manipulator.php');
+require_once('resources/Interactor.php');
 require_once('resources/ExternalRequest.php');
 require_once('resources/TokenConversor.php');
 
@@ -10,8 +10,8 @@ $HTMLInteractor  = new DOMDocument();
 $TokenConversor  = new TokenConversor();
 $ExternalRequest = new ExternalRequest($url);
 
-$Manipulator = new Manipulator($HTMLInteractor);
-$CONTROLLER  = new Controller($ExternalRequest, $Manipulator, $TokenConversor);
+$Interactor = new Interactor($HTMLInteractor);
+$CONTROLLER  = new Controller($ExternalRequest, $Interactor, $TokenConversor);
 
 $initialResponse = $CONTROLLER->getInitialData();
 $loadedInitialResponse = $CONTROLLER->loadResponse($initialResponse);

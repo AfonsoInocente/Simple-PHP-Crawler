@@ -1,10 +1,10 @@
 <?php
 
-class Manipulator {
+class Interactor {
     public object $_HTMLInteractor;
 
-    function __construct(object $InterfaceManipulator) {
-        $this->_HTMLInteractor = $InterfaceManipulator;
+    function __construct(object $InterfaceManipulator = null) {
+        $this->_HTMLInteractor = $InterfaceManipulator ?? (object) [];
     }
 
     public function loadHTMLData(string $element): array {
@@ -21,13 +21,16 @@ class Manipulator {
         ];
     }
 
-    public function findCookie($html): string {
-        preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $html, $matches);
+    public function findCookie(string $html): string {
+        preg_match_all('/^Set-Cookie:\s*([^;]*)/im', $html, $matches);
         foreach($matches[1] as $item) {
             if (substr($item, 0, 9 ) === "PHPSESSID") {
                 return $item;
             }
         }
+
+        throw new Exception("Nenhum Cookie encontrado.");
+
     }
 
     public function getTokenValue(object $HTMLAdapterInteractor): string {
