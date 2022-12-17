@@ -1,8 +1,9 @@
 <?php
-
-require_once('resources/TokenConversor.php');
-
 use PHPUnit\Framework\TestCase;
+
+use \App\Utils\TokenConversor;
+
+require_once('../vendor/autoload.php');
 
 class TokenConversorTest extends TestCase {
     public function testTokenConversion()

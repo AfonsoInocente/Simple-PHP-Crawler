@@ -1,5 +1,24 @@
 {
+    "name": "afonsoinocente/simple-php-crawler",
+    "description": "Creation of a simple and low level php crawler, using natives functions from php as curl, domdocument, domxpath, etc...",
+    "authors": [
+        {
+            "name": "Afonso Inocente",
+            "email": "afonsohenriqueinocente@gmail.com"
+        }
+    ],
     "require-dev": {
         "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src",
+            "App\\Controllers\\": "src/controllers",
+            "App\\Utils\\": "src/utils",
+            "App\\Infra\\": "src/infra"
+        },
+        "files": [
+            "src/helpers/constants.php"
+        ]
     }
 }

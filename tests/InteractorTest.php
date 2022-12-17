@@ -1,9 +1,13 @@
 <?php
 
-require_once('resources/Interactor.php');
-require_once('resources/ExternalRequest.php');
+namespace App\Infra;
 
 use PHPUnit\Framework\TestCase;
+
+use \App\Infra\ExternalRequest;
+use \App\Infra\Interactor;
+
+require_once('../vendor/autoload.php');
 
 class InteractorTest extends TestCase {
     public function testRetrieveToken()

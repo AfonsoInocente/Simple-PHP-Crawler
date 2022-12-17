@@ -1,17 +1,19 @@
 <?php
-require_once('resources/Controller.php');
-require_once('resources/Interactor.php');
-require_once('resources/ExternalRequest.php');
-require_once('resources/TokenConversor.php');
+use \App\Utils\TokenConversor;
+use \App\Infra\ExternalRequest;
+use \App\Infra\Interactor;
+use \App\Controllers\Controller;
 
-$url = 'http://applicant-test.us-east-1.elasticbeanstalk.com/';
+require_once('../vendor/autoload.php');
 
 $HTMLInteractor  = new DOMDocument();
 $TokenConversor  = new TokenConversor();
-$ExternalRequest = new ExternalRequest($url);
 
-$Interactor = new Interactor($HTMLInteractor);
+$ExternalRequest = new ExternalRequest(TARGET_URL);
+$Interactor      = new Interactor($HTMLInteractor);
+
 $CONTROLLER  = new Controller($ExternalRequest, $Interactor, $TokenConversor);
+
 
 $initialResponse = $CONTROLLER->getInitialData();
 $loadedInitialResponse = $CONTROLLER->loadResponse($initialResponse);

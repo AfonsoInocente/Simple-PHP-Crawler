@@ -1,11 +1,10 @@
 <?php
 
-class Interactor {
-    public object $_HTMLInteractor;
+namespace App\Infra;
 
-    function __construct(object $InterfaceManipulator = null) {
-        $this->_HTMLInteractor = $InterfaceManipulator ?? (object) [];
-    }
+class Interactor {
+    public function __construct(private object $HTMLInteractor)
+    {}
 
     public function loadHTMLData(string $element): array {
         if (!$element) {
@@ -13,10 +12,10 @@ class Interactor {
         }
 
         libxml_use_internal_errors(true);
-        $this->_HTMLInteractor->loadHTML($element);
+        $this->HTMLInteractor->loadHTML($element);
 
         return [
-            'Interactor' => $this->_HTMLInteractor,
+            'Interactor' => $this->HTMLInteractor,
             'HTML' => $element
         ];
     }
@@ -40,8 +39,8 @@ class Interactor {
     }
 
     public function findTheAnswer(string $element): string {
-        $this->_HTMLInteractor->loadHTML($element);
-        $spanElementObj = $this->_HTMLInteractor->getElementById('answer');
+        $this->HTMLInteractor->loadHTML($element);
+        $spanElementObj = $this->HTMLInteractor->getElementById('answer');
         $answerText = $spanElementObj->textContent;
         return $answerText;
     }

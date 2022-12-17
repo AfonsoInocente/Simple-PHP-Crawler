@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Utils;
+
 class TokenConversor {
     private array $_REPLACEMENTS = [
         'a' => "\x7a",
