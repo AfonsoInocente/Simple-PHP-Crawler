@@ -8,7 +8,7 @@ class Interactor {
 
     public function loadHTMLData(string $element): array {
         if (!$element) {
-            throw new Exception("O HTML não pode ser vazio.");
+            throw new \InvalidArgumentException("O HTML não pode ser vazio.", 400);
         }
 
         libxml_use_internal_errors(true);

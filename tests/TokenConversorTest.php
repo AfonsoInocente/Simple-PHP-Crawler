@@ -13,4 +13,14 @@ class TokenConversorTest extends TestCase {
         $expectedValue  = '321c815637ba719c542b06d95b191f62';
         $this->assertEquals($expectedValue, $convertedToken);
     }
+
+    public function testExceptionAreThrownForEmptyToken()
+    {
+        $TokenConversor = new TokenConversor();
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('O Token deve ser preenchido.');
+
+        $TokenConversor->convert('');
+    }
 }

@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 use \App\Infra\ExternalRequest;
 use \App\Infra\Interactor;
-use \App\Utils\CookieExtractor;
 
 require_once('vendor/autoload.php');
 
@@ -31,20 +30,21 @@ class InteractorTest extends TestCase {
         $this->assertEquals($expectedValue, $token);
     }
 
-    public function testRetrieveCookie()
-    {
-        $url = 'http://applicant-test.us-east-1.elasticbeanstalk.com/';
-        $ExternalRequest = new ExternalRequest($url);
+    // public function testExceptionAreThrownForNotExistentInput()
+    // {
+    //     $DOMDocument = new \DOMDocument();
+    //     $Interactor = new Interactor($DOMDocument);
 
-        $preparedCurl = $ExternalRequest->prepareToGetData();
-        $response = $ExternalRequest->execute($preparedCurl);
+    //     $html = '<html><body></body></html>';
 
-        $cookieToFind = 'PHPSESSID';
-        $CookieExtractor = new CookieExtractor();
-        $cookie = $CookieExtractor->findCookie($cookieToFind, $response);
+    //     $loadHtml = $Interactor->loadHTMLData($html);
+    //     $AdapterInteractor = new \DOMXpath($loadHtml['Interactor']);
 
-        $this->assertEquals($cookieToFind, substr($cookie, 0, 9));
-    }
+    //     $this->expectException(InvalidArgumentException::class);
+    //     $this->expectExceptionMessage('O Nome do Cookie a ser procurado deve ser preenchido.');
+
+    //     $Interactor->getTokenValue($AdapterInteractor);
+    // }
 
     public function testRetrieveAnswer()
     {

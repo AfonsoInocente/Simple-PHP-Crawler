@@ -43,6 +43,10 @@ class TokenConversor {
     ];
 
     public function convert(string $token): string {
+        if (!$token) {
+            throw new \InvalidArgumentException("O Token deve ser preenchido.", 400);
+        }
+
         $arrayToken = str_split($token, 1);
         $arrayLength = count($arrayToken);
         for ($position = 0; $position < $arrayLength; $position++) {

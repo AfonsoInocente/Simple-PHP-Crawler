@@ -14,7 +14,7 @@ $CookieExtractor  = new CookieExtractor();
 $ExternalRequest = new ExternalRequest(TARGET_URL);
 $Interactor      = new Interactor($HTMLInteractor);
 
-$CONTROLLER  = new Controller(
+$CONTROLLER = new Controller(
     $ExternalRequest,
     $Interactor,
     $TokenConversor,
