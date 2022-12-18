@@ -21,15 +21,44 @@ class Interactor {
     }
 
     public function getTokenValue(object $HTMLAdapterInteractor): string {
-        return $HTMLAdapterInteractor->query('//input[@id="token"]')
-        ->item(0)
-        ->getAttribute('value');
+        $element = $HTMLAdapterInteractor->query('//input[@id="token"]');
+
+        if (count($element) == 0) {
+            throw new \Exception("O elemento que contém o Token não foi identificado.", 404);
+        }
+
+        if (count($element) > 1) {
+            throw new \InvalidArgumentException("Foi encontrado mais de um Elemento com o ID Token. Por favor, verifique o código e tente novamente.", 400);
+        }
+
+        $inputElement = $element->item(0);
+        $token = $inputElement->getAttribute('value');
+
+        if (!$token) {
+            throw new \Exception("Não foi possível identificar um valor para o Token. Por favor, verifique o código e tente novamente.", 404);
+        }
+
+        return $token;
     }
 
     public function findTheAnswer(string $element): string {
+        if (!$element) {
+            throw new \InvalidArgumentException("É necessário informar um HTML para prosseguir.", 400);
+        }
+
         $this->HTMLInteractor->loadHTML($element);
         $spanElementObj = $this->HTMLInteractor->getElementById('answer');
+
+        if (!$spanElementObj) {
+            throw new \Exception("O elemento que contém a Resposta não foi identificado.", 404);
+        }
+
         $answerText = $spanElementObj->textContent;
+
+        if (!$answerText) {
+            throw new \InvalidArgumentException("A Resposta está nula. Por favor, verifique o código e tente novamente.", 400);
+        }
+
         return $answerText;
     }
 }

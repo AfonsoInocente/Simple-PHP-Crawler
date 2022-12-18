@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Infra;
-
 use PHPUnit\Framework\TestCase;
 
 use \App\Infra\ExternalRequest;
@@ -30,21 +28,68 @@ class InteractorTest extends TestCase {
         $this->assertEquals($expectedValue, $token);
     }
 
-    // public function testExceptionAreThrownForNotExistentInput()
-    // {
-    //     $DOMDocument = new \DOMDocument();
-    //     $Interactor = new Interactor($DOMDocument);
+    public function testExceptionAreThrownForNotExistentTokenInput()
+    {
+        $DOMDocument = new \DOMDocument();
+        $Interactor = new Interactor($DOMDocument);
 
-    //     $html = '<html><body></body></html>';
+        $html = '<html>
+            <body>
+            </body>
+        </html>';
 
-    //     $loadHtml = $Interactor->loadHTMLData($html);
-    //     $AdapterInteractor = new \DOMXpath($loadHtml['Interactor']);
+        $loadHtml = $Interactor->loadHTMLData($html);
 
-    //     $this->expectException(InvalidArgumentException::class);
-    //     $this->expectExceptionMessage('O Nome do Cookie a ser procurado deve ser preenchido.');
+        $AdapterInteractor = new \DOMXpath($loadHtml['Interactor']);
 
-    //     $Interactor->getTokenValue($AdapterInteractor);
-    // }
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('O elemento que contém o Token não foi identificado.');
+
+        $Interactor->getTokenValue($AdapterInteractor);
+    }
+
+    public function testExceptionAreThrownForMoreThanOneInputWithTokenId()
+    {
+        $DOMDocument = new \DOMDocument();
+        $Interactor = new Interactor($DOMDocument);
+
+        $html = '<html>
+            <body>
+                <input type="text" name="token" id="token">
+                <input type="text" name="token" id="token">
+            </body>
+        </html>';
+
+        $loadHtml = $Interactor->loadHTMLData($html);
+
+        $AdapterInteractor = new \DOMXpath($loadHtml['Interactor']);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Foi encontrado mais de um Elemento com o ID Token. Por favor, verifique o código e tente novamente.');
+
+        $Interactor->getTokenValue($AdapterInteractor);
+    }
+
+    public function testExceptionAreThrownForTokenInputWithNonExistingValue()
+    {
+        $DOMDocument = new \DOMDocument();
+        $Interactor = new Interactor($DOMDocument);
+
+        $html = '<html>
+            <body>
+                <input type="text" name="token" id="token">
+            </body>
+        </html>';
+
+        $loadHtml = $Interactor->loadHTMLData($html);
+
+        $AdapterInteractor = new \DOMXpath($loadHtml['Interactor']);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Não foi possível identificar um valor para o Token. Por favor, verifique o código e tente novamente.');
+
+        $Interactor->getTokenValue($AdapterInteractor);
+    }
 
     public function testRetrieveAnswer()
     {
@@ -52,7 +97,7 @@ class InteractorTest extends TestCase {
         $Interactor = new Interactor($DOMDocument);
 
         $html = '<html>
-        <head></head>
+            <head></head>
             <body>
                 RESPOSTA: <span id="answer">100</span>
                 <br>
@@ -64,5 +109,54 @@ class InteractorTest extends TestCase {
 
         $expectedValue = '100';
         $this->assertEquals($expectedValue, $answer);
+    }
+
+    public function testExceptionAreThrownForNotExistentAnswerInput()
+    {
+        $DOMDocument = new \DOMDocument();
+        $Interactor = new Interactor($DOMDocument);
+
+        $html = '<html>
+            <head></head>
+            <body></body>
+        </html>';
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('O elemento que contém a Resposta não foi identificado.');
+
+        $Interactor->findTheAnswer($html);
+    }
+
+    public function testExceptionAreThrownForAnswerInputWithNonExistingValue()
+    {
+        $DOMDocument = new \DOMDocument();
+        $Interactor = new Interactor($DOMDocument);
+
+        $html = '<html>
+            <head></head>
+            <body>
+                RESPOSTA: <span id="answer"></span>
+                <br>
+                <a href="http://localhost/testes/crawly-2022/treino/">Voltar</a>
+            </body>
+        </html>';
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('A Resposta está nula. Por favor, verifique o código e tente novamente.');
+
+        $Interactor->findTheAnswer($html);
+    }
+
+    public function testExceptionAreThrownForEmptyAnswerHTML()
+    {
+        $DOMDocument = new \DOMDocument();
+        $Interactor = new Interactor($DOMDocument);
+
+        $html = '';
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('É necessário informar um HTML para prosseguir.');
+
+        $Interactor->findTheAnswer($html);
     }
 }
