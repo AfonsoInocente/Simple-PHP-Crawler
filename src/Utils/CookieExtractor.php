@@ -2,8 +2,10 @@
 
 namespace App\Utils;
 
-class CookieExtractor {
-    public function findCookie(string $cookieName, string $html): string {
+class CookieExtractor
+{
+    public function findCookie(string $cookieName, string $html): string
+    {
         if (!$cookieName) {
             throw new \InvalidArgumentException("O Nome do Cookie a ser procurado deve ser preenchido.", 400);
         }

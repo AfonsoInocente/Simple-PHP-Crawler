@@ -2,8 +2,9 @@
 
 namespace App\Utils;
 
-class TokenConversor {
-    private array $_REPLACEMENTS = [
+class TokenConversor
+{
+    private array $replacements = [
         'a' => "\x7a",
         'b' => "\x79",
         'c' => "\x78",
@@ -42,7 +43,8 @@ class TokenConversor {
         '9' => "\x30",
     ];
 
-    public function convert(string $token): string {
+    public function convert(string $token): string
+    {
         if (!$token) {
             throw new \InvalidArgumentException("O Token deve ser preenchido.", 400);
         }
@@ -50,8 +52,8 @@ class TokenConversor {
         $arrayToken = str_split($token, 1);
         $arrayLength = count($arrayToken);
         for ($position = 0; $position < $arrayLength; $position++) {
-            if (in_array($arrayToken[$position], $this->_REPLACEMENTS)) {
-                $arrayToken[$position] = $this->_REPLACEMENTS[$arrayToken[$position]];
+            if (in_array($arrayToken[$position], $this->replacements)) {
+                $arrayToken[$position] = $this->replacements[$arrayToken[$position]];
             }
         }
 

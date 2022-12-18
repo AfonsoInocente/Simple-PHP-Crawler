@@ -5,33 +5,33 @@ use \App\Infra\ExternalRequest;
 use \App\Infra\Interactor;
 use \App\Controllers\Controller;
 
-require_once('../vendor/autoload.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$HTMLInteractor  = new DOMDocument();
-$TokenConversor  = new TokenConversor();
-$CookieExtractor  = new CookieExtractor();
+$htmlInteractor  = new DOMDocument();
+$tokenConversor  = new TokenConversor();
+$cookieExtractor  = new CookieExtractor();
 
-$ExternalRequest = new ExternalRequest(TARGET_URL);
-$Interactor      = new Interactor($HTMLInteractor);
+$externalRequest = new ExternalRequest(TARGET_URL);
+$interactor      = new Interactor($htmlInteractor);
 
-$CONTROLLER = new Controller(
-    $ExternalRequest,
-    $Interactor,
-    $TokenConversor,
-    $CookieExtractor
+$controller = new Controller(
+    $externalRequest,
+    $interactor,
+    $tokenConversor,
+    $cookieExtractor
 );
 
-$initialResponse = $CONTROLLER->getInitialData();
-$loadedInitialResponse = $CONTROLLER->loadResponse($initialResponse);
+$initialResponse = $controller->getInitialData();
+$loadedInitialResponse = $controller->loadResponse($initialResponse);
 
-$cookie = $CONTROLLER->getCookie("PHPSESSID", $loadedInitialResponse['HTML']);
+$cookie = $controller->getCookie("PHPSESSID", $loadedInitialResponse['HTML']);
 
-$HTMLAdapterInteractor = new DOMXpath($loadedInitialResponse['Interactor']);
-$token = $CONTROLLER->getToken($HTMLAdapterInteractor);
+$htmlAdapterInteractor = new DOMXpath($loadedInitialResponse['Interactor']);
+$token = $controller->getToken($htmlAdapterInteractor);
 
-$convertedToken = $CONTROLLER->convertToken($token);
+$convertedToken = $controller->convertToken($token);
 
-$lastResponse = $CONTROLLER->getLastData($convertedToken, $cookie);
-$answer = $CONTROLLER->getAnswer($lastResponse);
+$lastResponse = $controller->getLastData($convertedToken, $cookie);
+$answer = $controller->getAnswer($lastResponse);
 
-$CONTROLLER->tellTheAnswer($answer, $cookie, $token, $convertedToken);
+$controller->tellTheAnswer($answer, $cookie, $token, $convertedToken);

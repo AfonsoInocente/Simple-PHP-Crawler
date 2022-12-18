@@ -3,7 +3,7 @@ use PHPUnit\Framework\TestCase;
 
 use \App\Infra\ExternalRequest;
 
-require_once('vendor/autoload.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class ExternalRequestTest extends TestCase {
     public function testIfResponseIsAHtml()

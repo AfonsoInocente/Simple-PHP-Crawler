@@ -2,26 +2,29 @@
 
 namespace App\Infra;
 
-class Interactor {
-    public function __construct(private object $HTMLInteractor)
+class Interactor
+{
+    public function __construct(private object $htmlInteractor)
     {}
 
-    public function loadHTMLData(string $element): array {
+    public function loadHTMLData(string $element): array
+    {
         if (!$element) {
             throw new \InvalidArgumentException("O HTML não pode ser vazio.", 400);
         }
 
         libxml_use_internal_errors(true);
-        $this->HTMLInteractor->loadHTML($element);
+        $this->htmlInteractor->loadHTML($element);
 
         return [
-            'Interactor' => $this->HTMLInteractor,
+            'Interactor' => $this->htmlInteractor,
             'HTML' => $element
         ];
     }
 
-    public function getTokenValue(object $HTMLAdapterInteractor): string {
-        $element = $HTMLAdapterInteractor->query('//input[@id="token"]');
+    public function getTokenValue(object $htmlAdapterInteractor): string
+    {
+        $element = $htmlAdapterInteractor->query('//input[@id="token"]');
 
         if (count($element) == 0) {
             throw new \Exception("O elemento que contém o Token não foi identificado.", 404);
@@ -41,13 +44,14 @@ class Interactor {
         return $token;
     }
 
-    public function findTheAnswer(string $element): string {
+    public function findTheAnswer(string $element): string
+    {
         if (!$element) {
             throw new \InvalidArgumentException("É necessário informar um HTML para prosseguir.", 400);
         }
 
-        $this->HTMLInteractor->loadHTML($element);
-        $spanElementObj = $this->HTMLInteractor->getElementById('answer');
+        $this->htmlInteractor->loadHTML($element);
+        $spanElementObj = $this->htmlInteractor->getElementById('answer');
 
         if (!$spanElementObj) {
             throw new \Exception("O elemento que contém a Resposta não foi identificado.", 404);

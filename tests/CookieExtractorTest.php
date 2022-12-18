@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use \App\Utils\CookieExtractor;
 use \App\Infra\ExternalRequest;
 
-require_once('vendor/autoload.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class CookieExtractorTest extends TestCase {
     public function testRetrieveCookie()
