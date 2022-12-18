@@ -18,11 +18,11 @@ class ExternalRequest {
 
     public function prepareToPostData(string $token, string $cookie): object {
         if (!$token) {
-            throw new Exception("O Token não pode ser nulo");
+            throw new \InvalidArgumentException("O Token não pode ser vazio.", 400);
         }
 
         if (!$cookie) {
-            throw new Exception("O Cookie não pode ser nulo");
+            throw new \InvalidArgumentException("O Cookie não pode ser vazio.", 400);
         }
 
         $curl = curl_init();
@@ -39,15 +39,19 @@ class ExternalRequest {
     }
 
     public function execute(object $curl): string {
+        if (!is_a($curl, 'CurlHandle')) {
+            throw new \InvalidArgumentException('O Objeto enviado deve ser do tipo CurlHandle.', 400);
+        }
+
         if (curl_errno($curl)) {
-            throw new Exception(curl_error($curl));
+            throw new \Exception(curl_error($curl), 400);
         }
 
         $response = curl_exec($curl);
         $this->finish($curl);
 
         if (!$response) {
-            throw new Exception("Nenhum retorno obtido.");
+            throw new \Exception("Nenhum retorno obtido.", 404);
         }
 
         return $response;
