@@ -1,11 +1,12 @@
 <?php
-use PHPUnit\Framework\TestCase;
 
-use \App\Utils\TokenConversor;
+use PHPUnit\Framework\TestCase;
+use App\Utils\TokenConversor;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class TokenConversorTest extends TestCase {
+class TokenConversorTest extends TestCase
+{
     public function testTokenConversion()
     {
         $TokenConversor = new TokenConversor();

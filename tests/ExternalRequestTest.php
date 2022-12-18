@@ -1,11 +1,12 @@
 <?php
-use PHPUnit\Framework\TestCase;
 
-use \App\Infra\ExternalRequest;
+use PHPUnit\Framework\TestCase;
+use App\Infra\ExternalRequest;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class ExternalRequestTest extends TestCase {
+class ExternalRequestTest extends TestCase
+{
     public function testIfResponseIsAHtml()
     {
         $ExternalRequest = new ExternalRequest(TARGET_URL);

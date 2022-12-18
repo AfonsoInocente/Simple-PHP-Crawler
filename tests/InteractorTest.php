@@ -1,13 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-
-use \App\Infra\ExternalRequest;
-use \App\Infra\Interactor;
+use App\Infra\ExternalRequest;
+use App\Infra\Interactor;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class InteractorTest extends TestCase {
+class InteractorTest extends TestCase
+{
     public function testRetrieveToken()
     {
         $DOMDocument = new \DOMDocument();

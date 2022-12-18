@@ -15,8 +15,8 @@ class CookieExtractor
         }
 
         preg_match_all('/^Set-Cookie:\s*([^;]*)/im', $html, $matches);
-        foreach($matches[1] as $item) {
-            if (substr($item, 0, 9 ) == $cookieName) {
+        foreach ($matches[1] as $item) {
+            if (substr($item, 0, 9) == $cookieName) {
                 return $item;
             }
         }

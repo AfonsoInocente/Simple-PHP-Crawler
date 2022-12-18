@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Controllers;
 
-use \App\Utils\TokenConversor;
-use \App\Utils\CookieExtractor;
-use \App\Infra\ExternalRequest;
-use \App\Infra\Interactor;
+use App\Utils\TokenConversor;
+use App\Utils\CookieExtractor;
+use App\Infra\ExternalRequest;
+use App\Infra\Interactor;
 
 class Controller
 {
@@ -13,7 +14,8 @@ class Controller
         private Interactor $interfaceController,
         private TokenConversor $tokenConversor,
         private CookieExtractor $cookieExtractor
-    ) {}
+    ) {
+    }
 
     public function getInitialData(): string
     {

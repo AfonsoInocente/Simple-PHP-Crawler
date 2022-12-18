@@ -5,7 +5,8 @@ namespace App\Infra;
 class Interactor
 {
     public function __construct(private object $htmlInteractor)
-    {}
+    {
+    }
 
     public function loadHTMLData(string $element): array
     {

@@ -5,7 +5,8 @@ namespace App\Infra;
 class ExternalRequest
 {
     public function __construct(private string $url)
-    {}
+    {
+    }
 
     public function prepareToGetData(): object
     {
@@ -33,7 +34,7 @@ class ExternalRequest
         curl_setopt($curl, CURLOPT_URL, $this->url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, 'token=' . $token );
+        curl_setopt($curl, CURLOPT_POSTFIELDS, 'token=' . $token);
         curl_setopt($curl, CURLOPT_REFERER, $this->url);
         curl_setopt($curl, CURLOPT_COOKIE, $cookie);
         curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
