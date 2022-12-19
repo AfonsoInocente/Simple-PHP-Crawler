@@ -10,8 +10,7 @@ class CookieExtractorTest extends TestCase
 {
     public function testRetrieveCookie()
     {
-        $url = 'http://applicant-test.us-east-1.elasticbeanstalk.com/';
-        $ExternalRequest = new ExternalRequest($url);
+        $ExternalRequest = new ExternalRequest(TARGET_URL);
 
         $preparedCurl = $ExternalRequest->prepareToGetData();
         $response = $ExternalRequest->execute($preparedCurl);
@@ -38,9 +37,8 @@ class CookieExtractorTest extends TestCase
 
     public function testExceptionAreThrownForNonExistingCookie()
     {
-        $url = 'http://applicant-test.us-east-1.elasticbeanstalk.com/';
         $cookieName = 'PHPSESSID';
-        $ExternalRequest = new ExternalRequest($url);
+        $ExternalRequest = new ExternalRequest(TARGET_URL);
 
         $preparedCurl = $ExternalRequest->prepareToGetData();
         $response = $ExternalRequest->execute($preparedCurl);

@@ -17,5 +17,17 @@
         "files": [
             "src/helpers/constants.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests"
+        }
+    },
+    "require": {
+        "squizlabs/php_codesniffer": "*"
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:80 -t public",
+        "test": "phpunit"
     }
 }
