@@ -1,6 +1,6 @@
 # Simple-PHP-Crawler
 
- Creation of a simple and low level php crawler, using natives functions from php as curl, domdocument, domxpath, etc..
+Creation of a simple and low level php crawler, using natives functions from php as curl, domdocument, domxpath, etc..
 
 The objective of this Crawler is find an Answer that is only informed after some steps concluded.
 
@@ -16,6 +16,14 @@ And the fourth and last step requires to identify what is the answer hidden in t
 
 ###############################################
 
-O PHPUnit é utilizado para a realização dos testes. Basta instala-lo através do COMPOSER:
-- "composer require phpunit/phpunit --dev"
-Após a instalação, executar o: "vendor/bin/phpunit" a partir do terminal de sua preferência.
+To run this project, basically you have to run:
+
+- "docker build -t crawly:1.0 ."
+
+After, this:
+
+- "docker run --rm -p "8000:80" -it crawly:1.0"
+
+And then, just access "http://localhost:8000/" to see the answer.
+
+<img src="Running.jpg" alt="Projet running with docker"/>
