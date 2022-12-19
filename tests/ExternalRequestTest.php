@@ -1,9 +1,9 @@
 <?php
 
+namespace Test;
+
 use PHPUnit\Framework\TestCase;
 use App\Infra\ExternalRequest;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 
 class ExternalRequestTest extends TestCase
 {

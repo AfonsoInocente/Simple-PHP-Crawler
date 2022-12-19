@@ -1,9 +1,9 @@
 <?php
 
+namespace Test;
+
 use PHPUnit\Framework\TestCase;
 use App\Utils\TokenConversor;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 
 class TokenConversorTest extends TestCase
 {
@@ -19,7 +19,7 @@ class TokenConversorTest extends TestCase
     {
         $TokenConversor = new TokenConversor();
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('O Token deve ser preenchido.');
 
         $TokenConversor->convert('');

@@ -1,10 +1,10 @@
 <?php
 
+namespace Test;
+
 use PHPUnit\Framework\TestCase;
 use App\Infra\ExternalRequest;
 use App\Infra\Interactor;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 
 class InteractorTest extends TestCase
 {

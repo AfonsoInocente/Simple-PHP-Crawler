@@ -1,10 +1,10 @@
 <?php
 
+namespace Test;
+
 use PHPUnit\Framework\TestCase;
 use App\Utils\CookieExtractor;
 use App\Infra\ExternalRequest;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 
 class CookieExtractorTest extends TestCase
 {
@@ -29,7 +29,7 @@ class CookieExtractorTest extends TestCase
 
         $CookieExtractor = new CookieExtractor();
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('O Nome do Cookie a ser procurado deve ser preenchido.');
 
         $CookieExtractor->findCookie($cookieName, $response);
@@ -46,7 +46,7 @@ class CookieExtractorTest extends TestCase
 
         $CookieExtractor = new CookieExtractor();
 
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Nenhum Cookie encontrado.');
 
         $CookieExtractor->findCookie($cookieName, $response);
@@ -59,7 +59,7 @@ class CookieExtractorTest extends TestCase
 
         $CookieExtractor = new CookieExtractor();
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('O HTML para a busca deve ser enviado.');
 
         $CookieExtractor->findCookie($cookieName, $response);
