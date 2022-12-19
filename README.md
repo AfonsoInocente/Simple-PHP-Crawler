@@ -26,4 +26,5 @@ After, this:
 
 And then, just access "http://localhost:8000/" to see the answer.
 
+Here you can see the code running:
 <img src="Running.jpg" alt="Projet running with docker"/>
