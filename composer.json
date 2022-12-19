@@ -16,7 +16,7 @@
             "App\\": "src"
         },
         "files": [
-            "src/helpers/constants.php"
+            "src/Helpers/constants.php"
         ]
     },
     "autoload-dev": {
